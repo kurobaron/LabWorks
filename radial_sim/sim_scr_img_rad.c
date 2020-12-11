@@ -275,6 +275,13 @@ int main(void){
 	for (i = 0; i < data_num; i++){
 		N_hi = 1.5;//1.7 - 0.3*(i/100)/(data_num/100);
 		N_dif = 0.015;//0.0003*(1 + i%100);
+
+		double aver = 0.0;
+		for (int idx = 1; idx <= 1000; idx++){
+			aver += NN(Rad*((double)idx/1000.0), 0.0);
+		}
+		aver /= 1000.0;//屈折率の平均値
+
 		for (k = 0; k < 8; k++){
 			if (k == 0 || k == 4){
 				ang_tmp = -ANGLE/2.0;
@@ -355,7 +362,7 @@ int main(void){
 				if (j < div_num - 1){
 					fprintf(fp2, "%.6lf,", R[2]/R[0]);
 				}else{
-					fprintf(fp2, "%.6f\n", R[2]/R[0]);
+					fprintf(fp2, "%.6lf,%.6lf\n", R[2]/R[0], aver);
 				}
 			}			
 		}
